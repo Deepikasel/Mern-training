@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .container-main > div{
+        background-color: aqua;
+        border:solid;
+        border-color: black;
+       
+   }
+   @media screen and (min-width:500px){
+    body{
+        background-color: yellowgreen;
+    }
+   }
+    </style>
+<body>
+    <h1>3RD DAY TRAINING</h1>
+    <div style=" display: grid;grid-template-columns: 90px 90px 90px 90px 90px 90px;grid-template-rows: 40px 40px 40px 40px 40px;
+    background-color: dodgerblue;
+    padding: 10px;width: 500px;" class="container-main">
+        <div style="grid-column-start: 1;grid-column-end: 6;">
+            <p>hello</p>
+        </div>
+        <div style="grid-row-start: 2;grid-row-end: 5;"> 
+            <p >welcome</p>
+        </div>
+        <div style="grid-column-start: 2;grid-column-end: 4;" >
+            <p >all</p>
+        </div>
+        <div style="grid-column-start: 4;grid-column-end: 6;">  
+            <p >to</p>
+        </div>
+        <div style="grid-column-start: 2;grid-column-end: 6;">
+            <p >day</p>
+        </div>
+        <div style="grid-column-start: 2;grid-column-end: 3;">  
+            <p >three</p>
+        </div>
+        <div style="grid-column-start: 3;grid-column-end: 6;">
+            <p >Training</p>
+        </div>
+        </div>
+<h1 id="change">JS EVENT FUNCTIONS</h1>
+<button type="button" onclick="trial()">click me</button>
+<script>
+    function trial(){
+        document.getElementById('change').innerHTML="button clicked!"
+    }
+    </script>
+</body>
+</html>
