@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    button{
+        background-color:lawngreen;
+    }
+  h1{
+    text-align:center;
+  }
+    </style>
 <body>
-    <h1>ROCK PAPER SCISSORS</h1>
-    <div >
-    <button onclick="play('rock')">Rock</button>
-    <button onclick="play('paper')">Paper</button>
-    <button onclick="play('scissors')">Scissors</button>
+    <div style="margin-top: 400px;">
+    <h1 style="font-size: 75px;">ROCK PAPER SCISSORS</h1>
+    <div style="text-align: center;">
+    <button onclick="play('rock')" style="font-size: 75px;border: solid;border-radius: 30px;border-color: black;">Rock</button>
+    <button onclick="play('paper')" style="font-size: 75px;border: solid;border-radius: 30px;border-color: black;">Paper</button>
+    <button onclick="play('scissors')"style="font-size: 75px;border: solid;border-radius: 30px;border-color: black;">Scissors</button>
     </div>
-    <div id="result">Result:</div>
+    <div id="result" style="text-align: center;margin: 20px;font-size: 100px;">Result:</div>
+    </div>
     <script>
         function play(choice){
             const choices=['rock','paper','scissors'];
