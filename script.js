@@ -155,6 +155,34 @@ fetchApi(); */
 
 //String Literals
 
-const name='Deepika';
+/* const name='Deepika';
 const age='19';
 console.log(`I am ${name} and my age is ${age}`);
+ */
+
+
+//storage
+
+
+/* const mul=(a,b)=>{
+   return a*b ;
+}
+const square=(n)=>{
+   return mul(n,n);
+}
+const print=(n)=>{
+   let s= square(n);
+   console.log(s);
+}
+print(4); */
+
+
+//Macro and Micro Tasks
+
+console.log('First');
+Promise.resolve().then(console.log('From Promises'))
+setTimeout(()=>{
+   console.log('Inside TimeOut');
+
+},2000);
+console.log('last');
