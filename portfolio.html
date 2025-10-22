@@ -32,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -59,6 +58,17 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
         }
 
         nav ul {
@@ -78,7 +88,33 @@
             color: var(--primary);
         }
 
-        /* Hero Section */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -130,8 +166,9 @@
             border-radius: 50%;
             margin: 0 auto 2rem;
             border: 5px solid var(--primary);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
             animation: fadeIn 1s ease-out;
+            object-fit: cover;
         }
 
         .hero h1 {
@@ -196,12 +233,12 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
         .btn-secondary {
@@ -215,7 +252,6 @@
             transform: translateY(-3px);
         }
 
-        /* Sections */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -231,7 +267,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 1fr;
@@ -250,7 +285,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -296,7 +330,6 @@
             font-weight: bold;
         }
 
-        /* Projects Section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -317,15 +350,41 @@
             border-color: var(--primary);
         }
 
-        .project-content {
-            padding: 2rem;
+        .project-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--dark-light);
         }
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .project-content {
+            padding: 2rem;
         }
 
         .project-card h3 {
@@ -375,6 +434,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .project-link {
@@ -388,24 +448,13 @@
             color: var(--accent);
         }
 
-        /* Education Section */
-        .education-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        /* Certificates Section */
-        .certificates-grid {
+        .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .certificate-card {
+        .achievement-card {
             background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
             padding: 2rem;
             border-radius: 15px;
@@ -415,47 +464,47 @@
             overflow: hidden;
         }
 
-        .certificate-card::before {
+        .achievement-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--gold));
         }
 
-        .certificate-card:hover {
+        .achievement-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
             border-color: var(--primary);
         }
 
-        .certificate-icon {
+        .achievement-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        .certificate-card h3 {
+        .achievement-card h3 {
             color: var(--primary);
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
         }
 
-        .certificate-issuer {
+        .achievement-issuer {
             color: var(--accent);
             font-size: 1rem;
             margin-bottom: 1rem;
             font-weight: 500;
         }
 
-        .certificate-card p {
+        .achievement-card p {
             color: var(--text-dim);
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        .certificate-badge {
+        .achievement-badge {
             display: inline-block;
             background: rgba(251, 191, 36, 0.15);
             color: var(--gold);
@@ -465,6 +514,15 @@
             margin-top: 1rem;
             font-weight: 600;
             border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .education-card h3 {
@@ -484,7 +542,6 @@
             font-size: 1rem;
         }
 
-        /* Contact Section */
         .contact-content {
             text-align: center;
             max-width: 600px;
@@ -525,7 +582,6 @@
             color: var(--primary);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
@@ -533,11 +589,29 @@
             color: var(--text-dim);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: rgba(15, 23, 42, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 3rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul.active {
+                right: 0;
             }
 
             .hero h1 {
@@ -552,7 +626,7 @@
                 flex-direction: column;
             }
 
-            .projects-grid {
+            .projects-grid, .achievements-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -561,35 +635,41 @@
             }
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="container">
-            <div class="logo">Deepika S</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="logo">
+                <img src="images/My profile.png" alt="Deepika S">
+                Deepika S
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#achievements" onclick="closeMenu()">Achievements</a></li>
+                <li><a href="#education" onclick="closeMenu()">Education</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%236366f1' width='200' height='200' rx='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='80' fill='white'%3EDS%3C/text%3E%3C/svg%3E" alt="Deepika S" class="hero-image">
+            <img src="images/My profile.png" alt="Deepika S" class="hero-image">
             <h1>Deepika S</h1>
             <div class="subtitle">Full Stack Developer</div>
-            <p class="tagline">"Full Stack Developer passionate about building seamless, user-focused web applications."</p>
+            <p class="tagline">Crafting seamless, user-focused web applications with passion and precision</p>
             <div class="location">📍 Tirupur, Tamil Nadu</div>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -598,25 +678,23 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about">
         <h2>About Me</h2>
         <div class="about-content">
             <div>
-                <p>I'm a passionate Full Stack Developer with a strong interest in building modern, responsive, and user-friendly web applications. I love turning creative ideas into functional, efficient solutions that solve real-world problems. My journey in tech began with a curiosity to understand how things work behind the scenes on the web — and over time, that curiosity grew into a full-fledged skill set spanning both front-end and back-end development.</p>
+                <p>I'm a passionate Full Stack Developer with a strong focus on building modern, responsive, and user-friendly web applications. I thrive on turning creative ideas into functional, efficient solutions that solve real-world problems. My journey in tech began with curiosity about how the web works behind the scenes—and that curiosity has evolved into comprehensive skills spanning both front-end and back-end development.</p>
                 
-                <p>I enjoy working with a range of technologies and frameworks to design smooth user interfaces and robust server-side systems. Beyond just coding, I believe in writing clean, maintainable code and building scalable solutions. I thrive in collaborative environments where I can learn, contribute, and grow as a developer.</p>
+                <p>I enjoy working with diverse technologies and frameworks to design intuitive user interfaces and robust server-side systems. Beyond coding, I believe in writing clean, maintainable code and building scalable solutions. I flourish in collaborative environments where learning, contributing, and growing as a developer are part of the culture.</p>
                 
-                <p>When I take on a project, I focus on delivering results with precision and creativity. I love learning new tools, exploring emerging trends, and constantly improving my skills to stay ahead in this fast-moving field.</p>
+                <p>When I take on a project, I deliver results with precision and creativity. I'm constantly learning new tools, exploring emerging trends, and improving my skills to stay ahead in this fast-paced field.</p>
                 
-                <p><strong>What sets me apart</strong> is my balanced approach to development — I'm not just focused on writing code but also on understanding the user's perspective and building solutions that make an impact. I value teamwork, clear communication, and continuous learning. My adaptability allows me to work on different types of projects, from small creative websites to larger, more complex applications.</p>
+                <p><strong>What sets me apart</strong> is my balanced approach to development—I don't just write code; I understand the user's perspective and build solutions that create real impact. I value teamwork, clear communication, and continuous learning. My adaptability allows me to work on diverse projects, from creative small-scale websites to complex, large-scale applications.</p>
                 
-                <p><em>I believe every line of code is an opportunity to build something meaningful — and that's what drives me as a developer.</em></p>
+                <p><em>I believe every line of code is an opportunity to build something meaningful—and that's what drives me as a developer.</em></p>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
         <h2>Skills & Expertise</h2>
         <div class="skills-grid">
@@ -653,20 +731,19 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
         <h2>Projects & Experience</h2>
         <div class="projects-grid">
-            <!-- Project 1 -->
             <div class="project-card">
+                <div class="project-image">
+                    <img src="images/Document image.png" alt="Document Upload System">
+                </div>
                 <div class="project-content">
-                    <div class="project-header">
-                        <h3>📄 Document Upload & Retrieval System</h3>
-                    </div>
+                    <h3>Document Upload & Retrieval System</h3>
                     <div class="project-duration">Mar 2025 – Apr 2025</div>
                     <div class="project-role">Backend Developer</div>
-                    <p>A secure cloud-based document management system where users can upload, store, and retrieve files anytime. Built a reliable and scalable backend supporting file handling, secure access, and easy retrieval of uploaded documents.</p>
-                    <p><strong>Key Contributions:</strong> Built backend APIs, integrated user authentication and access control, implemented metadata storage, ensured error handling and server optimization, and connected with front-end through RESTful endpoints.</p>
+                    <p>A secure cloud-based document management system enabling users to upload, store, and retrieve files anytime. Built with a reliable and scalable backend supporting file handling, secure access, and seamless document retrieval.</p>
+                    <p><strong>Key Contributions:</strong> Developed backend APIs, integrated user authentication with access control, implemented metadata storage, ensured robust error handling and server optimization, and connected front-end through RESTful endpoints.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -681,16 +758,16 @@
                 </div>
             </div>
 
-            <!-- Project 2 -->
             <div class="project-card">
+                <div class="project-image">
+                    <img src="images/Bargaining-image.png" alt="Bargaining Bazaar">
+                </div>
                 <div class="project-content">
-                    <div class="project-header">
-                        <h3>🛍️ Bargaining Bazaar</h3>
-                    </div>
+                    <h3>Bargaining Bazaar</h3>
                     <div class="project-duration">Jan 2025 – Mar 2025</div>
                     <div class="project-role">Backend Developer</div>
-                    <p>An online e-commerce platform with a dynamic product bargaining feature, enabling buyers and sellers to negotiate prices in real time. Focuses on delivering a seamless shopping experience with secure payment and product management.</p>
-                    <p><strong>Key Contributions:</strong> Developed server-side logic for product listings and authentication, implemented RESTful APIs for real-time bargaining, ensured secure login with JWT, integrated database models, and optimized backend performance.</p>
+                    <p>An innovative e-commerce platform featuring dynamic product bargaining, enabling buyers and sellers to negotiate prices in real-time. Delivers a seamless shopping experience with secure payments and comprehensive product management.</p>
+                    <p><strong>Key Contributions:</strong> Developed server-side logic for product listings and authentication, implemented RESTful APIs for real-time bargaining functionality, ensured secure login with JWT, integrated database models, and optimized backend performance.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -704,16 +781,16 @@
                 </div>
             </div>
 
-            <!-- Internship Projects -->
             <div class="project-card">
+                <div class="project-image">
+                    <img src="images/InfoTech-Prodigy.png" alt="Prodigy InfoTech Internship">
+                </div>
                 <div class="project-content">
-                    <div class="project-header">
-                        <h3>🧠 Prodigy InfoTech Internship</h3>
-                    </div>
+                    <h3>Prodigy InfoTech Internship</h3>
                     <div class="project-duration">May 2025 – Jun 2025</div>
                     <div class="project-role">Backend Developer Intern</div>
-                    <p>Completed five comprehensive full stack development tasks during a 1-month internship at Prodigy InfoTech. Tasks designed to strengthen skills in backend development, API creation, authentication, and front-end integration.</p>
-                    <p><strong>Key Contributions:</strong> Designed backend architecture with secure APIs, built reusable middleware for authentication and error handling, implemented database connectivity and CRUD operations, collaborated with frontend team, and gained hands-on experience with debugging, deployment, and Git.</p>
+                    <p>Completed five comprehensive full-stack development tasks during a 1-month internship at Prodigy InfoTech. Projects designed to strengthen expertise in backend development, API creation, authentication, and front-end integration.</p>
+                    <p><strong>Key Contributions:</strong> Designed backend architecture with secure APIs, built reusable middleware for authentication and error handling, implemented database connectivity and CRUD operations, collaborated with the frontend team, and gained hands-on experience with debugging, deployment, and version control.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -733,7 +810,43 @@
         </div>
     </section>
 
-    <!-- Education Section -->
+    <section id="achievements">
+        <h2>Certifications & Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <h3>Prodigy InfoTech Internship</h3>
+                <div class="achievement-issuer">Prodigy InfoTech</div>
+                <p>Successfully completed a comprehensive 1-month full-stack development internship, delivering 5 backend-focused projects. Gained hands-on experience in Node.js, Express.js, MongoDB, RESTful API development, and team collaboration.</p>
+                <span class="achievement-badge">Completed June 2025</span>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">🎯</div>
+                <h3>HackVerse Hackathon</h3>
+                <div class="achievement-issuer">HackVerse</div>
+                <p>Participated in HackVerse hackathon, collaborating with a team to develop innovative solutions within tight deadlines. Strengthened problem-solving skills and learned to work effectively under pressure.</p>
+                <span class="achievement-badge">2025</span>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">🕸️</div>
+                <h3>Hack-O-Spider Hackathon</h3>
+                <div class="achievement-issuer">Hack-O-Spider</div>
+                <p>Competed in Hack-O-Spider hackathon, developing creative tech solutions and enhancing collaborative coding skills. Gained valuable experience in rapid prototyping and presenting technical concepts effectively.</p>
+                <span class="achievement-badge">2025</span>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">🌐</div>
+                <h3>Hack Social Hackathon</h3>
+                <div class="achievement-issuer">Hack Social</div>
+                <p>Participated in Hack Social hackathon focused on building technology solutions for social impact. Worked on projects addressing real-world challenges and developed meaningful applications with purpose-driven development.</p>
+                <span class="achievement-badge">2025</span>
+            </div>
+        </div>
+    </section>
+
     <section id="education">
         <h2>Education</h2>
         <div class="education-card">
@@ -743,7 +856,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2>Let's Connect</h2>
         <div class="contact-content">
@@ -768,9 +880,35 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Deepika S. Built with passion and code. All rights reserved.</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(event.target) && menu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
 </body>
 </html>
