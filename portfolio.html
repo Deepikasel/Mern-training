@@ -30,6 +30,15 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            --dark: #f8fafc;
+            --dark-light: #f1f5f9;
+            --dark-card: #ffffff;
+            --text: #0f172a;
+            --text-dim: #475569;
         }
 
         nav {
@@ -41,6 +50,11 @@
             z-index: 1000;
             padding: 1rem 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         nav .container {
@@ -75,6 +89,7 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         nav a {
@@ -86,6 +101,25 @@
 
         nav a:hover {
             color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--dark-card);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
         }
 
         .hamburger {
@@ -185,6 +219,18 @@
             color: var(--accent);
             margin-bottom: 1rem;
             animation: fadeIn 1s ease-out 0.4s both;
+            min-height: 2.5rem;
+        }
+
+        .typing-text {
+            border-right: 3px solid var(--accent);
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--accent); }
+            51%, 100% { border-color: transparent; }
         }
 
         .hero .tagline {
@@ -219,6 +265,7 @@
             justify-content: center;
             margin-top: 2rem;
             animation: fadeIn 1s ease-out 1s both;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -228,6 +275,9 @@
             font-weight: 600;
             transition: all 0.3s;
             display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -237,7 +287,7 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
@@ -249,7 +299,7 @@
 
         .btn-secondary:hover {
             background: var(--primary);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
         }
 
         section {
@@ -307,27 +357,39 @@
 
         .skill-category h3 {
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-size: 1.3rem;
         }
 
-        .skill-category ul {
-            list-style: none;
+        .skill-item {
+            margin-bottom: 1.5rem;
         }
 
-        .skill-category li {
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
             color: var(--text-dim);
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+        }
+
+        .skill-bar {
+            background: var(--dark);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
             position: relative;
         }
 
-        .skill-category li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            width: 0;
+        }
+
+        .skill-item.animate .skill-progress {
+            width: var(--progress);
         }
 
         .projects-grid {
@@ -342,10 +404,11 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid rgba(16, 185, 129, 0.2);
+            cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotate(-1deg);
             box-shadow: 0 15px 40px rgba(16, 185, 129, 0.25);
             border-color: var(--primary);
         }
@@ -366,6 +429,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
         }
 
         .project-image::before {
@@ -428,6 +496,21 @@
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.85rem;
+            opacity: 0;
+            animation: fadeInTag 0.5s forwards;
+        }
+
+        .tech-tag:nth-child(1) { animation-delay: 0.1s; }
+        .tech-tag:nth-child(2) { animation-delay: 0.2s; }
+        .tech-tag:nth-child(3) { animation-delay: 0.3s; }
+        .tech-tag:nth-child(4) { animation-delay: 0.4s; }
+        .tech-tag:nth-child(5) { animation-delay: 0.5s; }
+        .tech-tag:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInTag {
+            to {
+                opacity: 1;
+            }
         }
 
         .project-links {
@@ -441,11 +524,64 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .project-link:hover {
             color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: var(--primary-dark);
         }
 
         .achievements-grid {
@@ -548,6 +684,50 @@
             margin: 0 auto;
         }
 
+        .contact-form {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: var(--dark-light);
+            color: var(--text);
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
         .contact-links {
             display: flex;
             flex-direction: column;
@@ -610,6 +790,10 @@
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
             }
 
+            body.light-mode nav ul {
+                background: rgba(255, 255, 255, 0.98);
+            }
+
             nav ul.active {
                 right: 0;
             }
@@ -626,7 +810,8 @@
                 flex-direction: column;
             }
 
-            .projects-grid, .achievements-grid {
+            .projects-grid,
+            .achievements-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -660,6 +845,7 @@
                 <li><a href="#achievements" onclick="closeMenu()">Achievements</a></li>
                 <li><a href="#education" onclick="closeMenu()">Education</a></li>
                 <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
             </ul>
         </div>
     </nav>
@@ -668,12 +854,15 @@
         <div class="hero-content">
             <img src="images/My profile.png" alt="Deepika S" class="hero-image">
             <h1>Deepika S</h1>
-            <div class="subtitle">Full Stack Developer</div>
+            <div class="subtitle">
+                <span class="typing-text" id="typingText"></span>
+            </div>
             <p class="tagline">Crafting seamless, user-focused web applications with passion and precision</p>
             <div class="location">📍 Tirupur, Tamil Nadu</div>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <button class="btn btn-secondary" onclick="downloadResume()">📄 Download Resume</button>
             </div>
         </div>
     </section>
@@ -683,13 +872,9 @@
         <div class="about-content">
             <div>
                 <p>I'm a passionate Full Stack Developer with a strong focus on building modern, responsive, and user-friendly web applications. I thrive on turning creative ideas into functional, efficient solutions that solve real-world problems. My journey in tech began with curiosity about how the web works behind the scenes—and that curiosity has evolved into comprehensive skills spanning both front-end and back-end development.</p>
-                
                 <p>I enjoy working with diverse technologies and frameworks to design intuitive user interfaces and robust server-side systems. Beyond coding, I believe in writing clean, maintainable code and building scalable solutions. I flourish in collaborative environments where learning, contributing, and growing as a developer are part of the culture.</p>
-                
                 <p>When I take on a project, I deliver results with precision and creativity. I'm constantly learning new tools, exploring emerging trends, and improving my skills to stay ahead in this fast-paced field.</p>
-                
                 <p><strong>What sets me apart</strong> is my balanced approach to development—I don't just write code; I understand the user's perspective and build solutions that create real impact. I value teamwork, clear communication, and continuous learning. My adaptability allows me to work on diverse projects, from creative small-scale websites to complex, large-scale applications.</p>
-                
                 <p><em>I believe every line of code is an opportunity to build something meaningful—and that's what drives me as a developer.</em></p>
             </div>
         </div>
@@ -700,33 +885,74 @@
         <div class="skills-grid">
             <div class="skill-category">
                 <h3>Frontend Development</h3>
-                <ul>
-                    <li>React</li>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                    <li>Responsive Web Design</li>
-                </ul>
+                <div class="skill-item" data-progress="90">
+                    <div class="skill-name"><span>React</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 90%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="95">
+                    <div class="skill-name"><span>HTML5</span><span>95%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 95%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="90">
+                    <div class="skill-name"><span>CSS3</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 90%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="85">
+                    <div class="skill-name"><span>JavaScript</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 85%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="88">
+                    <div class="skill-name"><span>Responsive Design</span><span>88%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 88%"></div></div>
+                </div>
             </div>
+
             <div class="skill-category">
                 <h3>Backend Development</h3>
-                <ul>
-                    <li>Node.js</li>
-                    <li>Express.js</li>
-                    <li>API Development</li>
-                    <li>RESTful APIs</li>
-                    <li>Authentication</li>
-                </ul>
+                <div class="skill-item" data-progress="88">
+                    <div class="skill-name"><span>Node.js</span><span>88%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 88%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="85">
+                    <div class="skill-name"><span>Express.js</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 85%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="82">
+                    <div class="skill-name"><span>API Development</span><span>82%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 82%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="80">
+                    <div class="skill-name"><span>RESTful APIs</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 80%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="78">
+                    <div class="skill-name"><span>Authentication</span><span>78%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 78%"></div></div>
+                </div>
             </div>
+
             <div class="skill-category">
                 <h3>Database & Tools</h3>
-                <ul>
-                    <li>MongoDB</li>
-                    <li>MySQL</li>
-                    <li>Git & GitHub</li>
-                    <li>JSON</li>
-                    <li>CRUD Operations</li>
-                </ul>
+                <div class="skill-item" data-progress="83">
+                    <div class="skill-name"><span>MongoDB</span><span>83%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 83%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="80">
+                    <div class="skill-name"><span>MySQL</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 80%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="90">
+                    <div class="skill-name"><span>Git & GitHub</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 90%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="85">
+                    <div class="skill-name"><span>JSON</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 85%"></div></div>
+                </div>
+                <div class="skill-item" data-progress="87">
+                    <div class="skill-name"><span>CRUD Operations</span><span>87%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="--progress: 87%"></div></div>
+                </div>
             </div>
         </div>
     </section>
@@ -735,7 +961,7 @@
         <h2>Projects & Experience</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images/Document image.png')">
                     <img src="images/Document image.png" alt="Document Upload System">
                 </div>
                 <div class="project-content">
@@ -759,7 +985,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images/Bargaining-image.png')">
                     <img src="images/Bargaining-image.png" alt="Bargaining Bazaar">
                 </div>
                 <div class="project-content">
@@ -782,7 +1008,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images/InfoTech-Prodigy.png')">
                     <img src="images/InfoTech-Prodigy.png" alt="Prodigy InfoTech Internship">
                 </div>
                 <div class="project-content">
@@ -809,6 +1035,13 @@
             </div>
         </div>
     </section>
+
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">×</span>
+            <img src="" alt="Project Image" id="modalImage">
+        </div>
+    </div>
 
     <section id="achievements">
         <h2>Certifications & Achievements</h2>
@@ -860,6 +1093,25 @@
         <h2>Let's Connect</h2>
         <div class="contact-content">
             <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 2rem;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
+            
+            <div class="contact-form">
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
             <div class="contact-links">
                 <div class="contact-item">
                     <a href="mailto:deepikasdr456@gmail.com">
@@ -885,6 +1137,60 @@
     </footer>
 
     <script>
+        // Typing Animation
+        const phrases = [
+            'Full Stack Developer',
+            'Frontend Developer',
+            'Backend Developer',
+            'MERN Stack Specialist'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typingText');
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        typeEffect();
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const themeBtn = document.querySelector('.theme-toggle');
+            themeBtn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+
+        // Hamburger Menu
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             const hamburger = document.querySelector('.hamburger');
@@ -899,16 +1205,71 @@
             hamburger.classList.remove('active');
         }
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('navMenu');
             const hamburger = document.querySelector('.hamburger');
             const nav = document.querySelector('nav');
-            
             if (!nav.contains(event.target) && menu.classList.contains('active')) {
                 closeMenu();
             }
         });
+
+        // Skill Bar Animation
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillItems = entry.target.querySelectorAll('.skill-item');
+                    skillItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, index * 100);
+                    });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            skillObserver.observe(category);
+        });
+
+        // Image Modal
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // Download Resume
+        function downloadResume() {
+            alert('Resume download feature coming soon! For now, please contact me via email for my resume.');
+        }
+
+        // Contact Form
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Create mailto link
+            const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:deepikasdr456@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Reset form
+            event.target.reset();
+        }
     </script>
 </body>
 </html>
