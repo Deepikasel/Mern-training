@@ -12,16 +12,18 @@
         }
 
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --secondary: #3b82f6;
-            --dark: #0a0e27;
-            --dark-light: #151932;
-            --dark-card: #1a1f3a;
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --dark: #0f0a1e;
+            --dark-light: #1a1333;
+            --dark-card: #251c47;
             --text: #f1f5f9;
-            --text-dim: #94a3b8;
-            --accent: #06b6d4;
+            --text-dim: #a78bfa;
+            --accent: #f472b6;
             --gold: #fbbf24;
+            --devpost: #003e54;
+            --devpost-light: #0099cc;
         }
 
         body {
@@ -30,7 +32,6 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background 0.3s, color 0.3s;
         }
 
         body.light-mode {
@@ -38,18 +39,20 @@
             --dark-light: #f1f5f9;
             --dark-card: #ffffff;
             --text: #0f172a;
-            --text-dim: #475569;
+            --text-dim: #64748b;
+            --primary: #7c3aed;
+            --accent: #ec4899;
         }
 
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 10, 30, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
         }
 
         body.light-mode nav {
@@ -69,7 +72,7 @@
         nav .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
@@ -95,12 +98,24 @@
         nav a {
             color: var(--text);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             font-weight: 500;
+            position: relative;
         }
 
-        nav a:hover {
-            color: var(--primary);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         .theme-toggle {
@@ -109,9 +124,6 @@
             border-radius: 50px;
             padding: 0.5rem 1rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             color: var(--text);
             font-size: 1rem;
             transition: all 0.3s;
@@ -119,7 +131,7 @@
 
         .theme-toggle:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
         }
 
         .hamburger {
@@ -165,7 +177,7 @@
             width: 500px;
             height: 500px;
             background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            opacity: 0.15;
+            opacity: 0.2;
             top: -200px;
             right: -200px;
             animation: float 8s ease-in-out infinite;
@@ -177,15 +189,15 @@
             width: 400px;
             height: 400px;
             background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
-            opacity: 0.1;
+            opacity: 0.15;
             bottom: -150px;
             left: -150px;
             animation: float 6s ease-in-out infinite reverse;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
         }
 
         .hero-content {
@@ -200,15 +212,20 @@
             border-radius: 50%;
             margin: 0 auto 2rem;
             border: 5px solid var(--primary);
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
-            animation: fadeIn 1s ease-out;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.6);
+            animation: fadeIn 1s ease-out, pulse 3s infinite;
             object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(139, 92, 246, 0.6); }
+            50% { box-shadow: 0 0 80px rgba(236, 72, 153, 0.8); }
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: fadeIn 1s ease-out 0.2s both;
@@ -281,14 +298,14 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6);
         }
 
         .btn-secondary {
@@ -299,7 +316,19 @@
 
         .btn-secondary:hover {
             background: var(--primary);
+            color: white;
             transform: translateY(-3px) scale(1.05);
+        }
+
+        .btn-devpost {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-devpost:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(236, 72, 153, 0.6);
         }
 
         section {
@@ -312,27 +341,97 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+        .about-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .about-content p {
+        .about-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-intro p {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-card {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+            border-color: var(--primary);
+        }
+
+        .about-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .about-highlight {
+            background: var(--dark-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-highlight::before {
+            content: '💡';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.05;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .about-highlight h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-highlight p {
             color: var(--text-dim);
             font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 1rem;
         }
 
         .skills-grid {
@@ -342,16 +441,16 @@
         }
 
         .skill-category {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
+            background: var(--dark-card);
             padding: 2rem;
             border-radius: 15px;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
             border-color: var(--primary);
         }
 
@@ -377,19 +476,234 @@
             height: 8px;
             border-radius: 10px;
             overflow: hidden;
-            position: relative;
         }
 
         .skill-progress {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             border-radius: 10px;
             transition: width 1.5s ease;
             width: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .skill-item.animate .skill-progress {
             width: var(--progress);
+        }
+
+        .devpost-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2.5rem;
+            background: var(--dark-card);
+            border-radius: 20px;
+            border: 2px solid rgba(0, 153, 204, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .devpost-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .devpost-intro h3 {
+            color: var(--devpost-light);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .devpost-intro p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .devpost-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 153, 204, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 153, 204, 0.4);
+            border-color: var(--devpost-light);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hackathon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hackathon-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 153, 204, 0.2);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .hackathon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .hackathon-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 20px 50px rgba(0, 153, 204, 0.4);
+            border-color: var(--devpost-light);
+        }
+
+        .hackathon-header {
+            background: linear-gradient(135deg, rgba(0, 62, 84, 0.4), rgba(0, 153, 204, 0.2));
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hackathon-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px rgba(0, 153, 204, 0.5));
+        }
+
+        .hackathon-title-wrapper h3 {
+            color: var(--devpost-light);
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .hackathon-date {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .hackathon-content {
+            padding: 2rem;
+        }
+
+        .hackathon-project-name {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hackathon-description {
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .hackathon-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .hackathon-tech-tag {
+            background: rgba(0, 153, 204, 0.2);
+            color: var(--devpost-light);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 153, 204, 0.3);
+            transition: all 0.3s;
+        }
+
+        .hackathon-tech-tag:hover {
+            background: var(--devpost-light);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hackathon-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hackathon-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: rgba(0, 153, 204, 0.1);
+            border: 2px solid var(--devpost-light);
+            border-radius: 30px;
+            color: var(--devpost-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .hackathon-link:hover {
+            background: var(--devpost-light);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 153, 204, 0.4);
         }
 
         .projects-grid {
@@ -399,17 +713,17 @@
         }
 
         .project-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
+            background: var(--dark-card);
             border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-10px) rotate(-1deg);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
             border-color: var(--primary);
         }
 
@@ -436,21 +750,6 @@
             transform: scale(1.1);
         }
 
-        .project-image::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
-            z-index: 1;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
         .project-content {
             padding: 2rem;
         }
@@ -469,7 +768,7 @@
 
         .project-role {
             display: inline-block;
-            background: rgba(99, 102, 241, 0.2);
+            background: rgba(236, 72, 153, 0.2);
             color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -491,26 +790,12 @@
         }
 
         .tech-tag {
-            background: rgba(34, 211, 238, 0.1);
-            color: var(--accent);
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--primary);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.85rem;
-            opacity: 0;
-            animation: fadeInTag 0.5s forwards;
-        }
-
-        .tech-tag:nth-child(1) { animation-delay: 0.1s; }
-        .tech-tag:nth-child(2) { animation-delay: 0.2s; }
-        .tech-tag:nth-child(3) { animation-delay: 0.3s; }
-        .tech-tag:nth-child(4) { animation-delay: 0.4s; }
-        .tech-tag:nth-child(5) { animation-delay: 0.5s; }
-        .tech-tag:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInTag {
-            to {
-                opacity: 1;
-            }
+            border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
         .project-links {
@@ -541,7 +826,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s;
         }
 
         .modal.active {
@@ -591,11 +875,11 @@
         }
 
         .achievement-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
+            background: var(--dark-card);
             padding: 2rem;
             border-radius: 15px;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -607,12 +891,12 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
         .achievement-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
             border-color: var(--primary);
         }
 
@@ -653,12 +937,12 @@
         }
 
         .education-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-light) 100%);
+            background: var(--dark-card);
             padding: 2rem;
             border-radius: 15px;
             max-width: 600px;
             margin: 0 auto;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         .education-card h3 {
@@ -689,7 +973,7 @@
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         .form-group {
@@ -709,7 +993,7 @@
             width: 100%;
             padding: 0.8rem;
             border-radius: 10px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.3);
             background: var(--dark-light);
             color: var(--text);
             font-family: inherit;
@@ -720,7 +1004,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
         }
 
         .form-group textarea {
@@ -740,12 +1024,12 @@
             padding: 1.5rem;
             border-radius: 15px;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         .contact-item:hover {
             transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
         }
 
         .contact-item a {
@@ -780,7 +1064,7 @@
                 right: -100%;
                 width: 70%;
                 height: calc(100vh - 70px);
-                background: rgba(15, 23, 42, 0.98);
+                background: rgba(15, 10, 30, 0.98);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -811,7 +1095,9 @@
             }
 
             .projects-grid,
-            .achievements-grid {
+            .achievements-grid,
+            .hackathon-grid,
+            .about-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -841,6 +1127,7 @@
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
                 <li><a href="#about" onclick="closeMenu()">About</a></li>
                 <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                <li><a href="#hackathons" onclick="closeMenu()">Hackathons</a></li>
                 <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
                 <li><a href="#achievements" onclick="closeMenu()">Achievements</a></li>
                 <li><a href="#education" onclick="closeMenu()">Education</a></li>
@@ -860,6 +1147,7 @@
             <p class="tagline">Crafting seamless, user-focused web applications with passion and precision</p>
             <div class="location">📍 Tirupur, Tamil Nadu</div>
             <div class="cta-buttons">
+                <a href="#hackathons" class="btn btn-devpost">🏆 View Hackathons</a>
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 <button class="btn btn-secondary" onclick="downloadResume()">📄 Download Resume</button>
@@ -869,13 +1157,34 @@
 
     <section id="about">
         <h2>About Me</h2>
-        <div class="about-content">
-            <div>
-                <p>I'm a passionate Full Stack Developer with a strong focus on building modern, responsive, and user-friendly web applications. I thrive on turning creative ideas into functional, efficient solutions that solve real-world problems. My journey in tech began with curiosity about how the web works behind the scenes—and that curiosity has evolved into comprehensive skills spanning both front-end and back-end development.</p>
-                <p>I enjoy working with diverse technologies and frameworks to design intuitive user interfaces and robust server-side systems. Beyond coding, I believe in writing clean, maintainable code and building scalable solutions. I flourish in collaborative environments where learning, contributing, and growing as a developer are part of the culture.</p>
-                <p>When I take on a project, I deliver results with precision and creativity. I'm constantly learning new tools, exploring emerging trends, and improving my skills to stay ahead in this fast-paced field.</p>
-                <p><strong>What sets me apart</strong> is my balanced approach to development—I don't just write code; I understand the user's perspective and build solutions that create real impact. I value teamwork, clear communication, and continuous learning. My adaptability allows me to work on diverse projects, from creative small-scale websites to complex, large-scale applications.</p>
-                <p><em>I believe every line of code is an opportunity to build something meaningful—and that's what drives me as a developer.</em></p>
+        <div class="about-wrapper">
+            <div class="about-intro">
+                <p>I'm a passionate Full Stack Developer who transforms ideas into elegant, functional solutions that make a real impact.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <span class="about-icon">💻</span>
+                    <h3>Code Craftsmanship</h3>
+                    <p>I write clean, maintainable code with a focus on scalability and performance. Every line serves a purpose.</p>
+                </div>
+
+                <div class="about-card">
+                    <span class="about-icon">🎯</span>
+                    <h3>Problem Solver</h3>
+                    <p>I thrive on challenging problems and love finding creative solutions. Hackathons are my playground for innovation.</p>
+                </div>
+
+                <div class="about-card">
+                    <span class="about-icon">🚀</span>
+                    <h3>Continuous Learner</h3>
+                    <p>Technology evolves rapidly, and so do I. Always exploring new frameworks, tools, and best practices.</p>
+                </div>
+            </div>
+
+            <div class="about-highlight">
+                <h3>What Drives Me</h3>
+                <p>I don't just build applications—I create experiences that users love. My balanced approach combines technical expertise with user empathy, ensuring solutions that are both powerful and intuitive. Whether collaborating with teams or working independently, I bring dedication, creativity, and a commitment to excellence in every project.</p>
             </div>
         </div>
     </section>
@@ -957,6 +1266,268 @@
         </div>
     </section>
 
+    <section id="hackathons">
+        <h2>🏆 Devpost Hackathon Portfolio</h2>
+        
+        <div class="devpost-intro">
+            <h3>My Hackathon Journey</h3>
+            <p>Hackathons fuel my passion for innovation! I love collaborating with talented teams, tackling real-world challenges, and building impactful solutions under pressure. Each competition sharpens my skills and pushes me to think outside the box.</p>
+        </div>
+
+        <div class="devpost-stats">
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Achievements</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Hackathons</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Activities</div>
+            </div>
+        </div>
+
+        <div class="hackathon-grid">
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">🥗</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>GreenDiet Planner</h3>
+                        <div class="hackathon-date">Recent Project</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Sustainable Meal Planning</div>
+                    <p class="hackathon-description">
+                        A comprehensive meal planning application focused on sustainable eating habits. Helps users create eco-friendly meal plans with nutritional tracking and recipe suggestions.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">React</span>
+                        <span class="hackathon-tech-tag">Node.js</span>
+                        <span class="hackathon-tech-tag">API Integration</span>
+                        <span class="hackathon-tech-tag">Nutrition DB</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/greendiet-planner" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">😊</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>MoodFit</h3>
+                        <div class="hackathon-date">Health & Wellness</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Mental Wellness Tracker</div>
+                    <p class="hackathon-description">
+                        An innovative mental health application that helps users track their emotional well-being, provides mood insights, and suggests personalized wellness activities.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">React</span>
+                        <span class="hackathon-tech-tag">Chart.js</span>
+                        <span class="hackathon-tech-tag">Local Storage</span>
+                        <span class="hackathon-tech-tag">Analytics</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/moodfit-t8kyvh" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">💡</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>A&D INNOVATORS</h3>
+                        <div class="hackathon-date">AI Brain Collaboration</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Innovation Platform</div>
+                    <p class="hackathon-description">
+                        A collaborative platform connecting innovators and creators. Features project showcasing, team collaboration tools, and innovation management capabilities.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">Full Stack</span>
+                        <span class="hackathon-tech-tag">Collaboration Tools</span>
+                        <span class="hackathon-tech-tag">Real-time Updates</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/a-d-innovators-ai-brain" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">📚</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>ReadiFi</h3>
+                        <div class="hackathon-date">Education Tech</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Dyslexia-Friendly Reading Platform</div>
+                    <p class="hackathon-description">
+                        An accessible reading platform designed for individuals with dyslexia. Features customizable fonts, colors, and reading aids to improve comprehension and reduce reading fatigue.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">Accessibility</span>
+                        <span class="hackathon-tech-tag">UX Design</span>
+                        <span class="hackathon-tech-tag">Web Technologies</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/readifi-dyslexia-friendly-text-reader" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">😄</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>Emoji FunZone</h3>
+                        <div class="hackathon-date">Interactive Game</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Text to Emoji Converter Game</div>
+                    <p class="hackathon-description">
+                        A fun and interactive game that challenges users to convert text phrases into emoji sequences. Perfect for testing creativity and emoji knowledge!
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">JavaScript</span>
+                        <span class="hackathon-tech-tag">Game Design</span>
+                        <span class="hackathon-tech-tag">Interactive UI</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/emoji-funzone-text-to-emoji-story-creator" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">🤖</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>College Senior Bot</h3>
+                        <div class="hackathon-date">AI Assistant</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">AI-Powered Student Assistant</div>
+                    <p class="hackathon-description">
+                        An intelligent chatbot that helps college students with academic queries, course guidance, and campus information. Acts as a virtual senior mentor for new students.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">AI/ML</span>
+                        <span class="hackathon-tech-tag">Chatbot</span>
+                        <span class="hackathon-tech-tag">NLP</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/college-senior-bot-your-ai-campus-companion" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">🎨</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>Table of Wonders</h3>
+                        <div class="hackathon-date">Educational Tool</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Interactive Learning Platform</div>
+                    <p class="hackathon-description">
+                        An engaging educational platform that makes learning multiplication tables fun and interactive through gamification and visual feedback.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">Education Tech</span>
+                        <span class="hackathon-tech-tag">Gamification</span>
+                        <span class="hackathon-tech-tag">Interactive Design</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/table-of-wonders" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hackathon-card">
+                <div class="hackathon-header">
+                    <div class="hackathon-icon">🎭</div>
+                    <div class="hackathon-title-wrapper">
+                        <h3>Utsav Bharat</h3>
+                        <div class="hackathon-date">Cultural Platform</div>
+                    </div>
+                </div>
+                <div class="hackathon-content">
+                    <div class="hackathon-project-name">Discover Indian Festivals</div>
+                    <p class="hackathon-description">
+                        A comprehensive platform showcasing the rich tapestry of Indian festivals, traditions, and cultural celebrations. Helps users explore and learn about diverse cultural heritage.
+                    </p>
+                    
+                    <div class="hackathon-tech">
+                        <span class="hackathon-tech-tag">Content Management</span>
+                        <span class="hackathon-tech-tag">Cultural Database</span>
+                        <span class="hackathon-tech-tag">Interactive Maps</span>
+                    </div>
+                    
+                    <div class="hackathon-links">
+                        <a href="https://devpost.com/software/utsav-bharat-discover-indian-festival-stories" target="_blank" class="hackathon-link">
+                            <span>📱</span> View on Devpost
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://devpost.com/studiesfor456" target="_blank" class="btn btn-devpost">
+                View Full Devpost Profile →
+            </a>
+        </div>
+    </section>
+
     <section id="projects">
         <h2>Projects & Experience</h2>
         <div class="projects-grid">
@@ -968,8 +1539,8 @@
                     <h3>Document Upload & Retrieval System</h3>
                     <div class="project-duration">Mar 2025 – Apr 2025</div>
                     <div class="project-role">Backend Developer</div>
-                    <p>A secure cloud-based document management system enabling users to upload, store, and retrieve files anytime. Built with a reliable and scalable backend supporting file handling, secure access, and seamless document retrieval.</p>
-                    <p><strong>Key Contributions:</strong> Developed backend APIs, integrated user authentication with access control, implemented metadata storage, ensured robust error handling and server optimization, and connected front-end through RESTful endpoints.</p>
+                    <p>A secure cloud-based document management system enabling users to upload, store, and retrieve files anytime.</p>
+                    <p><strong>Key Contributions:</strong> Developed backend APIs, integrated user authentication with access control, implemented metadata storage.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -992,8 +1563,8 @@
                     <h3>Bargaining Bazaar</h3>
                     <div class="project-duration">Jan 2025 – Mar 2025</div>
                     <div class="project-role">Backend Developer</div>
-                    <p>An innovative e-commerce platform featuring dynamic product bargaining, enabling buyers and sellers to negotiate prices in real-time. Delivers a seamless shopping experience with secure payments and comprehensive product management.</p>
-                    <p><strong>Key Contributions:</strong> Developed server-side logic for product listings and authentication, implemented RESTful APIs for real-time bargaining functionality, ensured secure login with JWT, integrated database models, and optimized backend performance.</p>
+                    <p>An innovative e-commerce platform featuring dynamic product bargaining, enabling buyers and sellers to negotiate prices in real-time.</p>
+                    <p><strong>Key Contributions:</strong> Developed server-side logic, implemented RESTful APIs for real-time bargaining functionality.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -1015,8 +1586,8 @@
                     <h3>Prodigy InfoTech Internship</h3>
                     <div class="project-duration">May 2025 – Jun 2025</div>
                     <div class="project-role">Backend Developer Intern</div>
-                    <p>Completed five comprehensive full-stack development tasks during a 1-month internship at Prodigy InfoTech. Projects designed to strengthen expertise in backend development, API creation, authentication, and front-end integration.</p>
-                    <p><strong>Key Contributions:</strong> Designed backend architecture with secure APIs, built reusable middleware for authentication and error handling, implemented database connectivity and CRUD operations, collaborated with the frontend team, and gained hands-on experience with debugging, deployment, and version control.</p>
+                    <p>Completed five comprehensive full-stack development tasks during a 1-month internship at Prodigy InfoTech.</p>
+                    <p><strong>Key Contributions:</strong> Designed backend architecture, built reusable middleware for authentication and error handling.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Express.js</span>
@@ -1128,6 +1699,11 @@
                         <strong>GitHub:</strong> View my repositories
                     </a>
                 </div>
+                <div class="contact-item">
+                    <a href="https://devpost.com/studiesfor456" target="_blank">
+                        <strong>Devpost:</strong> View my hackathon projects
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1137,12 +1713,12 @@
     </footer>
 
     <script>
-        // Typing Animation
         const phrases = [
             'Full Stack Developer',
             'Frontend Developer',
             'Backend Developer',
-            'MERN Stack Specialist'
+            'MERN Stack Specialist',
+            'Hackathon Enthusiast'
         ];
         let phraseIndex = 0;
         let charIndex = 0;
@@ -1176,7 +1752,6 @@
 
         typeEffect();
 
-        // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const themeBtn = document.querySelector('.theme-toggle');
@@ -1184,13 +1759,11 @@
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
-        // Load saved theme
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             document.querySelector('.theme-toggle').textContent = '☀️';
         }
 
-        // Hamburger Menu
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             const hamburger = document.querySelector('.hamburger');
@@ -1214,7 +1787,6 @@
             }
         });
 
-        // Skill Bar Animation
         const observerOptions = {
             threshold: 0.5
         };
@@ -1237,7 +1809,6 @@
             skillObserver.observe(category);
         });
 
-        // Image Modal
         function openModal(imageSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
@@ -1250,24 +1821,20 @@
             modal.classList.remove('active');
         }
 
-        // Download Resume
         function downloadResume() {
             alert('Resume download feature coming soon! For now, please contact me via email for my resume.');
         }
 
-        // Contact Form
         function handleSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Create mailto link
             const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
             window.location.href = `mailto:deepikasdr456@gmail.com?subject=${subject}&body=${body}`;
             
-            // Reset form
             event.target.reset();
         }
     </script>
