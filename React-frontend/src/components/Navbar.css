@@ -1,0 +1,17 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: brown;
+    color: black;
+}
+.navbar li{
+    list-style-type: none;
+}
+.navbar li a{
+    text-decoration: none;
+color:blue;
+}
+.navbar li a:hover{
+    color: chocolate;
+    text-decoration:dashed;
+}
