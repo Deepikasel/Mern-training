@@ -1,11 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
+import { useEffect } from 'react'
 const Form = () => {
     const [form,setForm]=useState({
         name:"",
         email:"",
         age:"",
         department:""
+    })
+    useEffect(()=>{
+        console.log("useeffect is running");
     })
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -18,6 +22,7 @@ const Form = () => {
         e.preventDefault()
         console.log(form)
     }
+    
   return (
     <div>
         <form onSubmit={handleSubmit}>

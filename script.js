@@ -83,7 +83,7 @@ console.log(one); */
 
 /* 
 let b=[1,2,3,4,5];
- 
+
 const [one,...two]=b;
 console.log(two); */
 
@@ -179,10 +179,22 @@ print(4); */
 
 //Macro and Micro Tasks
 
-console.log('First');
+/*console.log('First');
 Promise.resolve().then(console.log('From Promises'))
 setTimeout(()=>{
    console.log('Inside TimeOut');
 
 },2000);
-console.log('last');
+console.log('last');*/
+
+const fetchApi1=async()=>{
+   try{
+      const res=await fetch('https://jsonplaceholder.typicode.com/users')
+      const data = await res.json()
+      {data.map((n)=>{console.log(n.address.geo.lng)})}
+   }
+   catch(error){
+      console.log(error);
+   }
+}
+fetchApi1();
